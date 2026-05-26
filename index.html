@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitation spéciale</title>
+<style>
+body { font-family: 'Segoe UI', sans-serif; background-color: #ffe5ec; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; text-align: center; }
+.container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 450px; width: 90%; box-sizing: border-box; }
+h1 { color: #ff4d6d; margin-bottom: 30px; font-size: 1.6rem; line-height: 1.4; }
+.buttons-container { display: flex; justify-content: center; gap: 20px; height: 60px; position: relative; }
+button { padding: 12px 35px; font-size: 1.1rem; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; }
+#btn-oui { background-color: #38b000; color: white; }
+#btn-non { background-color: #ff4d6d; color: white; position: absolute; left: 55%; z-index: 1000; }
+.form-group { margin-bottom: 20px; text-align: left; }
+label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
+select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; outline: none; background-color: #f9f9f9; cursor: pointer; }
+#btn-confirmer { width: 100%; padding: 12px; background-color: #38b000; color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<div class="container" id="page1">
+<h1>Alerte info : Ilona est officiellement réquisitionnée pour un resto. 🚨<br><br><span style="font-size: 1.3rem; font-weight: normal; color: #555;">Le refus n'étant pas une option contractuelle, acceptes-tu cette invitation ? 🥂</span></h1>
+<div class="buttons-container">
+<button id="btn-oui" onclick="validerOui()">Évidemment !</button>
+<button id="btn-non" onmouseover="fuir()" onclick="fuir()">Non merci</button>
+</div>
+</div>
+
+<div class="container" id="page2" style="display: none;">
+<h1 style="color: #38b000;">Super ! Hâte d'y être 🥰</h1>
+<p style="color: #555; margin-bottom: 30px;">Choisis le moment qui te convient le mieux, Ilona :</p>
+<div class="form-group">
+<label for="date-select">On y va quand ?</label>
+<select id="date-select">
+<option value="Vendredi soir">Vendredi soir prochain</option>
+<option value="Samedi soir">Samedi soir prochain</option>
+<option value="Dimanche midi">Dimanche midi prochain</option>
+<option value="Un autre jour">Un autre jour (dis-moi lequel !)</option>
+</select>
+</div>
+<div class="form-group">
+<label for="time-select">À quelle heure ?</label>
+<select id="time-select">
+<option value="19h00">19h00</option>
+<option value="19h30">19h30</option>
+<option value="20h00">20h00</option>
+<option value="20h30">20h30</option>
+</select>
+</div>
+<button id="btn-confirmer" onclick="envoyerChoix()">Confirmer le rendez-vous</button>
+</div>
+
+<script>
+function fuir() {
+const btnNon = document.getElementById('btn-non');
+const maxX = window.innerWidth - btnNon.offsetWidth - 20;
+const maxY = window.innerHeight - btnNon.offsetHeight - 20;
+btnNon.style.position = 'fixed';
+btnNon.style.left = Math.floor(Math.random() * maxX) + 'px';
+btnNon.style.top = Math.floor(Math.random() * maxY) + 'px';
+}
+function validerOui() {
+document.getElementById('page1').style.display = 'none';
+document.getElementById('page2').style.display = 'block';
+document.body.style.backgroundColor = '#e8faea';
+}
+function envoyerChoix() {
+const date = document.getElementById('date-select').value;
+const heure = document.getElementById('time-select').value;
+alert(`Parfait ! C'est noté pour le ${date} à ${heure}. À très vite ! 🥂`);
+}
+</script>
+</body>
+</html>
